@@ -7,7 +7,10 @@ const socket = require("socket.io");
 const app = express();
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://chatwfriends.vercel.app',
+  credentials: true,
+}));
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
@@ -30,7 +33,7 @@ const server = app.listen(process.env.PORT, () => {
 
 const io = socket(server, {
     cors: {
-        origin: "https://chatwfriends.vercel.app/",
+        origin: "https://chatwfriends.vercel.app",
         credentials: true,
     },
 });
